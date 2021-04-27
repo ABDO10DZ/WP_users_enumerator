@@ -1,4 +1,4 @@
-# Author ABDO10_DZ
+# Author : ABDO10_DZ
 # Tool : Automated Wordpress Users enumerator 
 import requests
 import sys
@@ -13,15 +13,15 @@ def takeitout(target):
 		return 1
 	res = res.json()
 
-	key = "slug"
+	key = "\x73\x6c\x75\x67"
 
 	for out in res:
 		print("[+] Username :" ,out[key])
 
 def main():
 	x = 0
-	json = "/wp-json/wp/v2/users"
-	rest = "?rest_route=/wp/v2/users"
+	json = "\x2f\x77\x70\x2d\x6a\x73\x6f\x6e\x2f\x77\x70\x2f\x76\x32\x2f\x75\x73\x65\x72\x73"
+	rest = "\x3f\x72\x65\x73\x74\x5f\x72\x6f\x75\x74\x65\x3d\x2f\x77\x70\x2f\x76\x32\x2f\x75\x73\x65\x72\x73"
 	if len(sys.argv) <= 2 :
 		help()
 		return 1
