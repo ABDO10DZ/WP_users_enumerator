@@ -36,17 +36,17 @@ def main():
 		print("[*] Start enumerate on :",target,"using payload :",rest)
 		takeitout(target+rest)
 	elif method == "all":
-		x+=1
-	else:
-		print("[-] Unknown method , methods : json/route/all ")
-		return 1
-	if (x == 1):
-		print("[*] Start enumerate on :",target,"using all payloads:",json,"/",rest)
+		print("[*] Start enumerate on :",target,"using all payloads")
 		for x in range(2):
-			if (x == 1):
+			if (x == 0):
+				print("\n[*] Lunching json method",x)
 				takeitout(target+json)
 			else:
+				print("\n[*] Lunching json method",x)
 				takeitout(target+rest)
+	else:
+		print("[-] Unknown method , methods : json/route/all")
+		return 1
 
 if __name__=="__main__":
     try:
