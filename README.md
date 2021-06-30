@@ -1,5 +1,5 @@
 # WP_users_enumerator
-Simple Users enumerator , extract wordpress users , two methods 
+Simple Users enumerator - with rest_user api, extract wordpress users , two methods 
 
 <br><h3>pre-requirements :</h3> 
 <br>python3  - Modules : requests,sys 
