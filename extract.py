@@ -1,17 +1,24 @@
 # Author : ABDO10_DZ
-# Tool : Automated Wordpress Users enumerator 
+# Tool : Automated Wordpress Users enumerator - with : rest_user
 import requests
 import sys
 def help():
-	print("methods : json/route/all")
-	print("python",sys.argv[0],"http://www.target.com/[path_to_WP] method")
-	print("[Example]:",sys.argv[0],"http://www.target.com/wp json")
+	print("methods : 0/1/all")
+	print("python",sys.argv[0],"http://www.target.com/[path_to_WP] <method>")
+	print("[Example]:",sys.argv[0],"http://www.target.com/wp 0")
 def takeitout(target):
-	res = requests.get(target)
+	try:
+		res = requests.get(target)
+	except Exception as e:
+		print("[-] Connection Failed , Exception Error:",e)
 	if (res.status_code != 200):
 		print("[-] die code :" , res.status_code)
 		return 1
-	res = res.json()
+	try:
+		res = res.json()
+	except Exception as e:
+		print("[-] Failed, [WAF/NOT WP CMS] Exception Error:",e)
+		return 1
 
 	key = "\x73\x6c\x75\x67"
 
@@ -29,22 +36,24 @@ def main():
 	else :
 		target = sys.argv[1]
 		method = sys.argv[2]
-	if method == "json":
+		if "http://" not in target and "https://" not in target:
+			target = "http://" + target
+	if method == "0":
 		print("[*] Start enumerate on :",target,"using payload :",json)
 		takeitout(target+json)
-	elif method == "route":
+	elif method == "1":
 		print("[*] Start enumerate on :",target,"using payload :",rest)
 		takeitout(target+rest)
 	elif method == "all":
 		print("[*] Start enumerate on :",target,"using all payloads")
 		for x in range(2):
-			print("\n[*] Lunching json method",x)
+			print("\n[*] Lunching rest_user method",x)
 			if (x == 0):
 				takeitout(target+json)
 			else:
 				takeitout(target+rest)
 	else:
-		print("[-] Unknown method , methods : json/route/all")
+		print("[-] Unknown method , methods : 0/1/all")
 		return 1
 
 if __name__=="__main__":
